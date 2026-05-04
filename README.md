@@ -113,9 +113,9 @@ console.log('[OSS] New practice session (JSON):', JSON.stringify(entry, null, 2)
 
 ## Validation
 
-- ✅ [Nu HTML Validator — password-screen.html](https://validator.w3.org/nu/?doc=http%3A%2F%2F136.119.73.97%2Fpages%2Fpassword-screen.html)
-- ✅ [Nu HTML Validator — tracker.html](https://validator.w3.org/nu/?doc=http%3A%2F%2F136.119.73.97%2Fpages%2Ftracker.html)
-- ✅ [WAVE Accessibility Report — password-screen.html](https://wave.webaim.org/report#/http://136.119.73.97/pages/password-screen.html)
+- ✅ [Nu HTML Validator — password-screen.html]([https://validator.w3.org/nu/?doc=http%3A%2F%2F136.119.73.97%2Fpages%2Fpassword-screen.html](https://validator.nu/?doc=https%3A%2F%2Freidkuhl.github.io%2Fzorbus-gorbus-final-project%2Fpages%2Fpassword-screen.html)
+- ✅ [Nu HTML Validator — tracker.html]([https://validator.w3.org/nu/?doc=http%3A%2F%2F136.119.73.97%2Fpages%2Ftracker.html](https://validator.nu/?doc=https%3A%2F%2Freidkuhl.github.io%2Fzorbus-gorbus-final-project%2Fpages%2Ftracker.html)
+- ✅ [WAVE Accessibility Report — password-screen.html](https://wave.webaim.org/report#/https://reidkuhl.github.io/zorbus-gorbus-final-project/pages/password-screen.html)
 
 ---
 
