@@ -1,3 +1,5 @@
+console.info('%c[OSS] Login hint → password: flobjj', 'color:#E8C040; font-weight:bold;');
+
 function enterApp() {
   const name = document.getElementById('gate-name').value.trim();
   const pass = document.getElementById('gate-pass').value;
