@@ -4,15 +4,13 @@
 
 ## Author
 
-**Reid Kuhl** — [github.com/ReidKuhl](https://github.com/ReidKuhl)
+**Reid Kuhlers** — [github.com/ReidKuhl](https://github.com/ReidKuhl)
 
 ---
 
 ## User Story
 
-- *As a* Brazilian Jiu-Jitsu practitioner,
-- *I want* to log my training sessions, track competition results, and monitor my belt progress,
-- *So that* I can stay accountable, measure improvement, and see how far I've come on the mat.
+- *As a* Brazilian Jiu-Jitsu practitioner, *I want* to log my training sessions, track competition results, and monitor my belt progress, *So that* I can stay accountable, measure improvement, and see how far I've come on the mat.
 
 ---
 
@@ -137,6 +135,6 @@ Planned issues include:
 ## Deployed App
 
 - 🌐 **GitHub Pages:** [reidkuhl.github.io/zorbus-gorbus-final-project](https://reidkuhl.github.io/zorbus-gorbus-final-project)
-- ☁️ **GCP:** [http://136.119.73.97/pages/password-screen.html](http://136.119.73.97/pages/password-screen.html)
+- ☁️ **GCP:** [http://136.119.73.97/pages/password-screen.html](http://136.119.73.97/app/pages/password-screen.html)
 
 > **Login hint (also printed to browser console on load):** password = `flobjj`
