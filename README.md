@@ -129,6 +129,7 @@ Planned issues include:
 - Dark mode toggle
 - Mobile layout improvements for the stats tab
 - Add a notes/journal tab for free-form writing between sessions
+- Cannot figure out why the password hint does not show in the GCP version
 
 ---
 
