@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OSS — BJJ Training Log</title>
+  <link rel="icon" type="image/png" href="../assets/oss-logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+
+  <div id="app-shell">
+    <div class="belt-stripe"></div>
+
+    <header>
+      <div class="logo-block">
+        <div class="logo-oss">OSS</div>
+        <div class="logo-sub">Brazilian Jiu-Jitsu — Training Log</div>
+      </div>
+      <div class="header-right">
+        <div class="header-stats">
+          <div class="stat-pill">
+            <div class="num" id="stat-sessions">0</div>
+            <div class="lbl">Sessions</div>
+          </div>
+          <div class="stat-pill">
+            <div class="num" id="stat-hours">0</div>
+            <div class="lbl">Hours</div>
+          </div>
+          <div class="stat-pill">
+            <div class="num" id="stat-comps">0</div>
+            <div class="lbl">Comps</div>
+          </div>
+        </div>
+        <div class="user-block">
+          <div class="user-name" id="user-display-name">Practitioner</div>
+          <button class="signout-btn" onclick="signOut()">Sign Out</button>
+        </div>
+      </div>
+    </header>
+
+    <nav class="tabs-bar">
+      <button class="tab-btn active" data-tab="log">Training Log</button>
+      <button class="tab-btn" data-tab="comps">Competitions</button>
+      <button class="tab-btn" data-tab="stats">Stats</button>
+    </nav>
+
+    <main class="main">
+
+      <!-- ── LOG TAB ── -->
+      <div id="tab-log" class="tab-panel active">
+
+        <div class="belt-bar-wrap">
+          <div class="belt-bar-label">
+            <span>Belt Progress</span>
+            <span id="belt-current-label">White Belt</span>
+          </div>
+          <div class="belt-segments" id="belt-segments">
+            <div class="belt-seg" data-color="white"></div>
+            <div class="belt-seg" data-color="blue"></div>
+            <div class="belt-seg" data-color="purple"></div>
+            <div class="belt-seg" data-color="brown"></div>
+            <div class="belt-seg" data-color="black"></div>
+          </div>
+          <div style="display:flex; gap:0.75rem; align-items:center; flex-wrap:wrap;">
+            <label>Current Belt:</label>
+            <select id="belt-select" style="width:auto; font-size:0.75rem; padding:0.35rem 0.7rem;">
+              <option value="0">White</option>
+              <option value="1">Blue</option>
+              <option value="2">Purple</option>
+              <option value="3">Brown</option>
+              <option value="4">Black</option>
+            </select>
+            <label style="margin-left:1rem;">Stripes:</label>
+            <select id="stripe-select" style="width:auto; font-size:0.75rem; padding:0.35rem 0.7rem;">
+              <option value="0">0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="section-head">
+          <div class="section-title">Practice Sessions</div>
+          <button class="btn" onclick="openModal('practice')">+ Log Session</button>
+        </div>
+
+        <div class="entries-list" id="practice-list"></div>
+      </div>
+
+      <!-- ── COMPS TAB ── -->
+      <div id="tab-comps" class="tab-panel">
+        <div class="section-head">
+          <div>
+            <div class="section-title">Competitions</div>
+            <div id="comp-record" class="record-display">
+              <span class="win">0</span><span class="sep"> – </span><span class="loss">0</span>
+            </div>
+          </div>
+          <button class="btn" onclick="openModal('comp')">+ Log Competition</button>
+        </div>
+        <div class="entries-list" id="comp-list"></div>
+      </div>
+
+      <!-- ── STATS TAB ── -->
+      <div id="tab-stats" class="tab-panel">
+
+        <div class="streak-banner">
+          <div class="streak-num" id="s-streak">0</div>
+          <div>
+            <div class="stats-label">Day Streak</div>
+            <div style="font-family:'Crimson Pro',serif; font-style:italic; color:var(--text-dim); font-size:0.9rem; margin-top:0.2rem;">Keep showing up.</div>
+          </div>
+        </div>
+
+        <div class="section-title" style="margin-bottom:1.5rem;">Overview</div>
+        <div class="stats-grid">
+          <div class="stats-cell"><div class="stats-num" id="s-total">0</div><div class="stats-label">Total Sessions</div></div>
+          <div class="stats-cell"><div class="stats-num" id="s-hours">0</div><div class="stats-label">Hours on Mat</div></div>
+          <div class="stats-cell"><div class="stats-num" id="s-avg">0</div><div class="stats-label">Avg Min / Session</div></div>
+          <div class="stats-cell"><div class="stats-num" id="s-wins">0</div><div class="stats-label">Competition Wins</div></div>
+          <div class="stats-cell"><div class="stats-num" id="s-month">0</div><div class="stats-label">Sessions This Month</div></div>
+          <div class="stats-cell"><div class="stats-num" id="s-comps">0</div><div class="stats-label">Competitions</div></div>
+        </div>
+
+        <div class="type-breakdown" id="type-breakdown"></div>
+
+        <div style="margin-top:2.5rem;">
+          <div class="heatmap-title">Activity — Last 90 Days</div>
+          <div class="heatmap" id="heatmap"></div>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- ── PRACTICE MODAL ── -->
+    <div class="modal-overlay" id="modal-practice">
+      <div class="modal">
+        <div class="modal-header">
+          <div class="modal-title">Log Session</div>
+          <button class="modal-close" onclick="closeModal('practice')">✕</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Date</label>
+              <input type="date" id="p-date">
+            </div>
+            <div class="form-group">
+              <label>Session Type</label>
+              <select id="p-type">
+                <option value="gi">Gi</option>
+                <option value="nogi">No-Gi</option>
+                <option value="drilling">Drilling</option>
+                <option value="open-mat">Open Mat</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Duration (minutes)</label>
+              <input type="number" id="p-mins" placeholder="90" min="1" max="480">
+            </div>
+            <div class="form-group">
+              <label>School / Gym</label>
+              <input type="text" id="p-school" placeholder="e.g. Flo BJJ">
+            </div>
+            <div class="form-group full">
+              <label>Techniques Worked (comma-separated)</label>
+              <input type="text" id="p-techs" placeholder="armbar, triangle, de la riva...">
+            </div>
+            <div class="form-group full">
+              <label>Notes</label>
+              <textarea id="p-notes" placeholder="What went well? What needs work?"></textarea>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button class="btn btn-ghost" onclick="closeModal('practice')">Cancel</button>
+            <button class="btn" id="practice-save-btn" onclick="saveEntry('practice')">Save Session</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── COMP MODAL ── -->
+    <div class="modal-overlay" id="modal-comp">
+      <div class="modal">
+        <div class="modal-header">
+          <div class="modal-title">Log Competition</div>
+          <button class="modal-close" onclick="closeModal('comp')">✕</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Date</label>
+              <input type="date" id="c-date">
+            </div>
+            <div class="form-group">
+              <label>Tournament Name</label>
+              <input type="text" id="c-name" placeholder="e.g. IBJJF Boston Open">
+            </div>
+            <div class="form-group">
+              <label>Division</label>
+              <input type="text" id="c-division" placeholder="e.g. Adult Blue Belt Middle">
+            </div>
+            <div class="form-group">
+              <label>Result</label>
+              <select id="c-result">
+                <option value="gold">🥇 Gold</option>
+                <option value="silver">🥈 Silver</option>
+                <option value="bronze">🥉 Bronze</option>
+                <option value="loss">Did Not Place</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Wins</label>
+              <input type="number" id="c-wins" placeholder="0" min="0">
+            </div>
+            <div class="form-group">
+              <label>Losses</label>
+              <input type="number" id="c-losses" placeholder="0" min="0">
+            </div>
+            <div class="form-group full">
+              <label>Notes / Match Summary</label>
+              <textarea id="c-notes" placeholder="How did the matches go? Key moments?"></textarea>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button class="btn btn-ghost" onclick="closeModal('comp')">Cancel</button>
+            <button class="btn" id="comp-save-btn" onclick="saveEntry('comp')">Save Competition</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- #app-shell -->
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <p class="footer-title">OSS — BJJ Training Log</p>
+    <p class="footer-links">
+      Built by
+      <a href="https://github.com/ReidKuhl" target="_blank" rel="noopener">Reid Kuhlers</a>
+      &nbsp;|&nbsp;
+      <a href="https://github.com/ReidKuhl/zorbus-gorbus-final-project" target="_blank" rel="	   noopener">View Repository</a>
+    </p>
+  </footer>
+
+  <!-- JS module -->
+  <script type="module" src="../scripts/tracker.js"></script>
+</body>
+</html>
+
